@@ -2,7 +2,7 @@
 node {
 stage('Preparation') {
       //Installing kubectl in Jenkins agent
-      sh 'kubectl installed'
+      sh 'echo "Kubectl Installed"'
 //Clone git repository
   git url:'https://github.com/pnenwani14/customapp1.git'
    }
