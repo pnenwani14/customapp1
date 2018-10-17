@@ -10,8 +10,8 @@ stage('Integration') {
  
       withKubeConfig([credentialsId: 'default', serverUrl: 'https://10.55.4.73']) {
       
-         sh 'kubectl create cm nodejs-app --from-file=src/ --namespace=myapp-integration -o=yaml --dry-run > deploy/cm.yaml'
-         sh 'kubectl apply -f deploy/ --namespace=myapp-integration'
+         sh '/usr/local/sbin/kubectl create cm nodejs-app --from-file=src/ --namespace=myapp-integration -o=yaml --dry-run > deploy/cm.yaml'
+         sh '/usr/local/sbin/kubectl apply -f deploy/ --namespace=myapp-integration'
          try{
           //Gathering Node.js app's external IP address
           def ip = ''
@@ -22,7 +22,7 @@ stage('Integration') {
           println("Waiting for IP address")        
           while(ip=='' && count<countLimit) {
            sleep 30
-           ip = sh script: 'kubectl get svc --namespace=myapp-integration -o jsonpath="{.items[?(@.metadata.name==\'nginx-reverseproxy-service\')].status.loadBalancer.ingress[*].ip}"', returnStdout: true
+           ip = sh script: '/usr/local/sbin/kubectl get svc --namespace=myapp-integration -o jsonpath="{.items[?(@.metadata.name==\'nginx-reverseproxy-service\')].status.loadBalancer.ingress[*].ip}"', returnStdout: true
            ip=ip.trim()
            count++                                                                              
           }
@@ -36,7 +36,7 @@ stage('Integration') {
   
      //Cleaning the integration environment
      println("Cleaning integration environment...")
-     sh 'kubectl delete -f deploy --namespace=myapp-integration'
+     sh '/usr/local/sbin/kubectl delete -f deploy --namespace=myapp-integration'
          println("Integration stage finished.")   
     }                      
       
@@ -44,7 +44,7 @@ stage('Integration') {
     catch(Exception e) {
      println("Integration stage failed.")
       println("Cleaning integration environment...")
-      sh 'kubectl delete -f deploy --namespace=myapp-integration'
+      sh '/usr/local/sbin/kubectl delete -f deploy --namespace=myapp-integration'
           error("Exiting...")                                     
          }
 }
@@ -52,8 +52,8 @@ stage('Integration') {
  stage('Production') {
       withKubeConfig([credentialsId: 'default', serverUrl: 'https://10.55.4.73']) {
       
-       sh 'kubectl create cm nodejs-app --from-file=src/ --namespace=myapp-production -o=yaml --dry-run > deploy/cm.yaml'
-sh 'kubectl apply -f deploy/ --namespace=myapp-production'
+       sh '/usr/local/sbin/kubectl create cm nodejs-app --from-file=src/ --namespace=myapp-production -o=yaml --dry-run > deploy/cm.yaml'
+sh '/usr/local/sbin/kubectl apply -f deploy/ --namespace=myapp-production'
       
   
       //Gathering Node.js app's external IP address
@@ -65,7 +65,7 @@ sh 'kubectl apply -f deploy/ --namespace=myapp-production'
          println("Waiting for IP address")        
          while(ip=='' && count<countLimit) {
           sleep 30
-          ip = sh script: 'kubectl get svc --namespace=myapp-production -o jsonpath="{.items[?(@.metadata.name==\'nginx-reverseproxy-service\')].status.loadBalancer.ingress[*].ip}"', returnStdout: true
+          ip = sh script: '/usr/local/sbin/kubectl get svc --namespace=myapp-production -o jsonpath="{.items[?(@.metadata.name==\'nginx-reverseproxy-service\')].status.loadBalancer.ingress[*].ip}"', returnStdout: true
           ip = ip.trim()
           count++                                                                              
      }
