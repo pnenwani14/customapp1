@@ -13,7 +13,8 @@ stage('Integration') {
  
       withKubeConfig([credentialsId: 'default', serverUrl: 'https://10.55.4.73']) {
       
-         sh 'kubectl create --from-file=deploy/mysql-deployment.yaml'
+         sh 'kubectl create cm nodejs-app --from-file=src/ --namespace=myapp-integration -o=yaml --dry-run > deploy/cm.yaml'
+         sh 'kubectl apply -f deploy/ --namespace=myapp-integration'
                   
 		 try{
           //Gathering Node.js app's external IP address
