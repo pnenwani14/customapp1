@@ -13,9 +13,17 @@ stage('Integration') {
  
       withKubeConfig([credentialsId: 'default', serverUrl: 'https://10.55.4.73']) {
       
-         sh 'kubectl create -f deploy/hello-world.yaml'
-                  
+         status = sh script: 'kubectl get services navbar-service1', returnStdout: true
 		 
-   }
+		 if(status==1){
+		 sh 'kubectl create -f deploy/hello-world.yaml'
+        }
+    else{
+        sh 'kubectl delete deployment navbar-deployment'
+		sh 'kubectl delete service navbar-service'
+		sh 'kubectl create -f deploy/hello-world.yaml'
+     }
+	
+	}
 }
 }
