@@ -13,9 +13,9 @@ stage('Integration') {
  
       withKubeConfig([credentialsId: 'jenkins-deployer-credentials', serverUrl: 'https://10.55.4.73']) {
       
-         sh '/usr/local/sbin/kubectl create cm nodejs-app --from-file=src/ --namespace=myapp-integration -o=yaml --dry-run > deploy/cm.yaml'
-         sh '/usr/local/sbin/kubectl apply -f deploy/ --namespace=myapp-integration'
-         try{
+         sh 'kubectl create --from-file=deploy/mysql-deployment.yaml'
+                  
+		 try{
           //Gathering Node.js app's external IP address
           def ip = ''
           def count = 0
