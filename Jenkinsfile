@@ -11,7 +11,7 @@ stage('Preparation') {
    }
 stage('Integration') {
  
-      withKubeConfig([credentialsId: 'jenkins-deployer-credentials', serverUrl: 'https://10.55.4.73']) {
+      withKubeConfig([credentialsId: 'default', serverUrl: 'https://10.55.4.73']) {
       
          sh 'kubectl create --from-file=deploy/mysql-deployment.yaml'
                   
@@ -53,7 +53,7 @@ stage('Integration') {
 }
    }
  stage('Production') {
-      withKubeConfig([credentialsId: 'jenkins-deployer-credentials', serverUrl: 'https://10.55.4.73']) {
+      withKubeConfig([credentialsId: 'default', serverUrl: 'https://10.55.4.73']) {
       
        sh '/usr/local/sbin/kubectl create cm nodejs-app --from-file=src/ --namespace=myapp-production -o=yaml --dry-run > deploy/cm.yaml'
 sh '/usr/local/sbin/kubectl apply -f deploy/ --namespace=myapp-production'
