@@ -13,15 +13,7 @@ stage('Integration') {
  
       withKubeConfig([credentialsId: 'default', serverUrl: 'https://10.55.4.73']) {
       
-         status = sh script: 'set +e; kubectl get services navbar-service', returnStdout: true
-		 
-		 if(status==1){
-		 sh 'kubectl create -f deploy/hello-world.yaml'
-        }
-    else{
-        sh 'kubectl delete deployment navbar-deployment'
-		sh 'kubectl delete service navbar-service'
-		sh 'kubectl create -f deploy/hello-world.yaml'
+        sh 'kubectl replace -f /tmp/hello.yaml  --force'
      }
 	
 	}
