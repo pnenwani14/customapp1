@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: helloworld
-        image: karthequian/helloworld:black
+        image: karthequian/helloworld:blue
         ports:
         - containerPort: 80
 ---
