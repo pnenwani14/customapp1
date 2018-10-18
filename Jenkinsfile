@@ -13,7 +13,7 @@ stage('Integration') {
  
       withKubeConfig([credentialsId: 'default', serverUrl: 'https://10.55.4.73']) {
       
-         status = sh script: 'kubectl get services navbar-service1', returnStdout: true
+         status = sh script: 'kubectl get services navbar-service', returnStdout: true
 		 
 		 if(status==1){
 		 sh 'kubectl create -f deploy/hello-world.yaml'
