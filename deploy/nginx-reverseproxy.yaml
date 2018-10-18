@@ -11,7 +11,6 @@ spec:
   - name: http
     port: 80
     protocol: TCP
----
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -37,7 +36,6 @@ spec:
         - name: config-volume
           configMap:
             name: nginx-reverseproxy-config
----
 apiVersion: v1
 kind: ConfigMap
 metadata:
