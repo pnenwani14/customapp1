@@ -14,6 +14,8 @@ stage('Integration') {
       withKubeConfig([credentialsId: 'default', serverUrl: 'https://10.55.4.73']) {
       
 		sh 'kubectl replace -f deploy/hello-world.yaml --force'
+		sh ' kubectl get pods'
+		sh ' kubectl get services'
      }
 	
 	}
