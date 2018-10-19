@@ -22,7 +22,7 @@ stage('Deploy App') {
           def count = 0
           def countLimit = 10
            
-		   sh 'kubectl get po -l app=helloworld -o=custom-columns=NAME:.metadata.name|grep -v "NAME"|xargs -i kubectl cp deploy/index.html {}:/www/data/index.html'
+		   pods=sh script: 'kubectl get po -l app=helloworld -o=custom-columns=NAME:.metadata.name|grep -v "NAME"'
 		   print (pods)
      }
 	    catch(Exception e) {
