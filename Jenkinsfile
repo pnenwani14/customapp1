@@ -9,12 +9,12 @@ stage('Preparation') {
 //Clone git repository
   git url:'https://github.com/pnenwani14/customapp1.git'
    }
-stage('Integration') {
+stage('Deploy App') {
  
       withKubeConfig([credentialsId: 'default', serverUrl: 'https://10.55.4.73']) {
       
 		sh 'kubectl replace -f deploy/hello-world.yaml --force'
-		sh ' kubectl get pods'
+		sh ' sleep 30 && kubectl get pods'
 		sh ' kubectl get services'
      }
 	
