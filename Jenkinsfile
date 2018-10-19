@@ -16,7 +16,16 @@ stage('Deploy App') {
 		sh 'kubectl replace -f deploy/hello-world.yaml --force'
 		sh ' sleep 10 && kubectl get pods'
 		sh ' kubectl get services'
+		
+		try{
+          //Gathering Node.js app's external IP address
+          def pods = ''
+          def count = 0
+          def countLimit = 10
+           
+		   pods=sh script: 'kubectl get po -l app=helloworld -o=custom-columns=NAME:.metadata.name'
+		   print (pods)
      }
 	
 	}
-}
+} }
