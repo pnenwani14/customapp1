@@ -20,7 +20,7 @@ stage('Deploy Container') {
  
       withKubeConfig([credentialsId: 'default', serverUrl: 'https://10.55.4.73']) {
       
-		sh 'kubectl set image deployment/navbar-deployment helloworld=pnenwani/hello-karbon --record'
+		sh 'kubectl set image deployment/acs-deployment helloworld=pnenwani/hello-karbon --record'
 		sh ' sleep 15 && kubectl get services'
 		
 		
