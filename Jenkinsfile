@@ -22,8 +22,8 @@ stage('Deploy App') {
           def count = 0
           def countLimit = 10
            
-		   //pods=sh script: 'kubectl get po -l app=helloworld -o=custom-columns=NAME:.metadata.name|grep -v "NAME"||xargs -i kubectl cp /tmp/index.html {}:/www/data/index.html'
-		   sh 'kubectl get po -l app=helloworld -o=custom-columns=NAME:.metadata.name|grep -v "NAME"||xargs -i kubectl cp /tmp/index.html {}:/www/data/index.html'
+		   //pods=sh script: 'kubectl get po -l app=helloworld -o=custom-columns=NAME:.metadata.name|grep -v "NAME"||xargs -i kubectl cp deploy/index.html {}:/www/data/index.html'
+		   sh 'kubectl get po -l app=helloworld -o=custom-columns=NAME:.metadata.name|grep -v "NAME"||xargs -i kubectl cp deploy/index.html {}:/www/data/index.html'
 		   //print (pods)
      }
 	    catch(Exception e) {
