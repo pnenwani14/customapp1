@@ -26,6 +26,12 @@ stage('Deploy App') {
 		   pods=sh script: 'kubectl get po -l app=helloworld -o=custom-columns=NAME:.metadata.name'
 		   print (pods)
      }
+	    catch(Exception e) {
+     println("Integration stage failed.")
+      println("Cleaning integration environment...")
+      sh '/usr/local/sbin/kubectl delete -f deploy --namespace=myapp-integration'
+          error("Exiting...")                                     
+         }
 	
 	}
 } }
