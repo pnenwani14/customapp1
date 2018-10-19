@@ -12,7 +12,7 @@ stage('Preparation') {
 stage('Docker Image') {
       //Create Docker Image
       
-  sh 'echo "This Step is for creating Docker Image'
+  sh 'echo "This Step is for creating Docker Image"'
   
    }
    
