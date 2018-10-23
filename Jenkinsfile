@@ -8,6 +8,13 @@ stage('Preparation') {
 //Clone git repository
   git url:'https://github.com/pnenwani14/customapp1.git'
    }
+
+stage('Create App Build') {
+      //Create Docker Image
+      
+  sh 'echo "This Step is for creating Application Build"'
+  
+   }
    
 stage('Docker Image') {
       //Create Docker Image
