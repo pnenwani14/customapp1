@@ -9,7 +9,7 @@ stage('Preparation') {
   git url:'https://github.com/pnenwani14/customapp1.git'
    }
 
-stage('Create App Build') {
+stage(' App Build') {
       //Create Docker Image
       
   sh 'echo "This Step is for creating Application Build"'
