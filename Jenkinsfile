@@ -21,7 +21,7 @@ stage('Build image') {
     /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-        app = docker.build("getintodevops/hellonode")
+        app = docker.build("pnenwani/php-mysql")
  }
 
     stage('Test image') {
@@ -39,8 +39,8 @@ stage('Build image') {
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
         docker.withRegistry('https://registry.hub.docker.com', 'DockerHubCred') {
-            app.push("php-mysql:${env.BUILD_NUMBER}")
-            app.push("php-mysql:latest")
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
         }
     }   
    
