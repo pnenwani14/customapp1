@@ -16,12 +16,13 @@ stage(' App Build') {
 sh 'echo "This Step is for creating Application Build"'
   
 }
+
 stage('Build image') {
     /* This builds the actual image; synonymous to
          * docker build on the command line */
 
         app = docker.build("getintodevops/hellonode")
-    }
+ }
 
     stage('Test image') {
         /* Ideally, we would run a test framework against our image.
@@ -37,9 +38,9 @@ stage('Build image') {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
+        docker.withRegistry('https://registry.hub.docker.com', 'DockerHubCred') {
+            app.push("php-mysql:${env.BUILD_NUMBER}")
+            app.push("php-mysql:latest")
         }
     }   
    

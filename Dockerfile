@@ -15,4 +15,4 @@ RUN apt-get update \
 
 # take the contents of the local html/ folder, and mount to /var/www/html/ inside the container
 # this is the expected web root of the default website for this server, so put your index.php here
-COPY html/ /var/www/html/
+COPY deploy/ /var/www/html/

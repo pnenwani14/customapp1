@@ -1,0 +1,19 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: navbar-deployment
+spec:
+  selector:
+    matchLabels:
+      app: helloworld
+  replicas: 3 # tells deployment to run 3 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      containers:
+      - name: helloworld
+        image: karthequian/helloworld:blue
+        ports:
+        - containerPort: 80
