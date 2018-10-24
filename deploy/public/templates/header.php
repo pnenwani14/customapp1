@@ -12,4 +12,4 @@
 </head>
 
 <body>
-	<h1>Simple Database App</h1>
+	<h1>Sample Mysql-Database App</h1>
