@@ -49,7 +49,7 @@ stage('Deploy Container') {
  
       withKubeConfig([credentialsId: 'default', serverUrl: 'https://10.55.4.73']) {
       
-		sh 'kubectl set image deployment/php-mysql-deployment php-mysql=pnenwani/php-mysql:${env.BUILD_NUMBER} --record'
+		sh 'kubectl set image deployment/php-mysql-deployment php-mysql=pnenwani/php-mysql:latest --record'
 		sh ' sleep 15 && kubectl get services'
 		
 		
