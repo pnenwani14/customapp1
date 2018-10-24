@@ -1,0 +1,58 @@
+
+
+
+1. Create a Sample Kubernetes Cluster..  
+
+8 Mins
+================================================================================
+
+2. Install Mysql App on Cluster and show PVC storage.
+
+Create Pvc for  Mysql::::::::::::::         kubectl create -f mysql-pvc.yaml
+
+Create Secret for Mysql Password ::::::::::::    kubectl create secret generic mysql-pass --from-literal=password=abcd1234
+
+
+Create Mysql App using PVC :::::::::::::::  kubectl create -f mysql.yaml
+
+kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h php-mysql -pabcd1234
+
+show databases
+
+use mysql
+
+show tables
+
+=======================================================================
+
+kubectl create -f php-mysql.yaml
+
+kubectl get deployments
+
+kubectl get services
+
+==================================================================
+
+Login.. 
+
+
+
+
+kubectl get deployment
+
+
+kubectl get pods
+
+kubectl get deployment
+
+
+
+
+
+3. Jenkin. App 
+
+
+1. Update Code base.
+2. Create Build
+3. Create Docker Image and Push
+4. Update App Deployment.
