@@ -6,10 +6,10 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Sample Mysql-Database App</title>
+	<title>Simple Database App</title>
 
 	<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-	<h1>Sample Mysql-Database App</h1>
+	<h1>Simple Database App</h1>
