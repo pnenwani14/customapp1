@@ -16,7 +16,7 @@ RUN apt-get update \
 # take the contents of the local html/ folder, and mount to /var/www/html/ inside the container
 # this is the expected web root of the default website for this server, so put your index.php here
 COPY deploy/ /var/www/html/
-RUN sed -i 's/HOSTNAME/php-mysql/' /var/www/html/config.php
+RUN sed -i 's/HOSTNAME/mysqlservice/' /var/www/html/config.php
 RUN sed -i 's/DBUSER/root/' /var/www/html/config.php
 RUN sed -i 's/DBPASSWD/abcd1234/' /var/www/html/config.php
 RUN sed -i 's/DBNAME/test/' /var/www/html/config.php
