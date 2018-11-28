@@ -3,8 +3,8 @@ node {
 
 stage('Preparation') {
       //Installing kubectl in Jenkins agent
-      sh 'curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl'
-  sh 'chmod +x ./kubectl && mv kubectl /usr/sbin && env'
+      sh 'echo "Installing kubectl in Jenkins agent"'
+//  sh 'chmod +x ./kubectl && mv kubectl /usr/sbin && env'
   
 //Clone git repository
   git url:'https://github.com/pnenwani14/customapp1.git'
@@ -44,10 +44,15 @@ stage('Build image') {
         }
     }   
    
-   
+step([$class: 'BlueprintLaunch', appProfileName: 'Default', applicationName: 'Jenkin_${BUILD_ID}', blueprintDescription: 'Description is empty', blueprintName: 'Container Custom App', projectName: 'default', runtimeVariables: '''{
+    "DBPASSWD": "abcd1234",
+    "NameSpace": "development"
+}''', waitForSuccessFulLaunch: true])
+
+ 
 stage('Deploy Container') {
  
-      withKubeConfig([credentialsId: 'default', serverUrl: 'https://10.55.4.80']) {
+      withKubeConfig([credentialsId: '0bfe52e0-7f7a-4139-ae31-c6b047fcca17', serverUrl: 'https://10.55.4.80']) {
       
 		sh 'kubectl set image deployment/php-mysql-deployment php-mysql=pnenwani/php-mysql:latest --record'
 		sh ' sleep 15 && kubectl get services'
